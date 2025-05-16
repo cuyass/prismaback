@@ -73,7 +73,7 @@ public class LessonService {
         try{
             lessonRepository.deleteById(id);
         } catch (Exception e) {
-            throw new LessonDeleteException(id)
+            throw new LessonDeleteException(id);
         }
     }
 
