@@ -84,6 +84,8 @@ public class LessonService {
                 .id(lesson.getId())
                 .title(lesson.getTitle())
                 .markdownContent(lesson.getMarkdownContent())
+                .createdAt(lesson.getCreatedAt())
+                .updatedAt(lesson.getUpdatedAt())
                 .build();
     }
 

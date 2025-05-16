@@ -2,9 +2,12 @@ package com.prismaback.prismaback;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 import io.github.cdimascio.dotenv.*;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class PrismabackApplication {
 
 	public static void main(String[] args) {
