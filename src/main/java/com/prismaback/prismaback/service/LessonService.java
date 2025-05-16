@@ -46,9 +46,9 @@ public class LessonService {
         return toDTO(lessonRepository.save(lesson));
     }
 
-    public Lesson updateLesson(Long id, LessonDTO dto) {
+    public LessonDTO updateLesson(Long id, LessonDTO dto) {
         Lesson existing = lessonRepository.findById(id)
-        .orElseThrow(() -> new LessonNotFoundException(id));
+            .orElseThrow(() -> new LessonNotFoundException(id));
 
         validateLessonDTO(dto);
 

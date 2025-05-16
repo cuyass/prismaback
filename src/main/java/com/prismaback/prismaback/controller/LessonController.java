@@ -4,6 +4,8 @@ import com.prismaback.prismaback.DTO.LessonDTO;
 import com.prismaback.prismaback.model.Lesson;
 import com.prismaback.prismaback.service.LessonService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,27 +18,32 @@ public class LessonController {
     private final LessonService lessonService;
 
     @GetMapping
-    public List<LessonDTO> getAllLessons() {
-        return lessonService.getAllLessons();
+    public ResponseEntity<List<LessonDTO>> getAllLessons() {
+        List<LessonDTO> lessons = lessonService.getAllLessons();
+        return ResponseEntity.ok(lessons);
     }
 
     @GetMapping("/{id}")
-    public LessonDTO getLessonById(@PathVariable Long id) {
-        return lessonService.getLessonById(id);
+    public ResponseEntity<LessonDTO> getLessonById(@PathVariable Long id) {
+        LessonDTO lesson = lessonService.getLessonById(id);
+        return ResponseEntity.ok(lesson);
     }
 
     @PostMapping
-    public LessonDTO createLesson(@RequestBody LessonDTO lessonDTO) {
-        return lessonService.createLesson(lessonDTO);
+    public ResponseEntity<LessonDTO> createLesson(@RequestBody LessonDTO lessonDTO) {
+        LessonDTO created = lessonService.createLesson(lessonDTO);
+        return ResponseEntity.status(201).body(created);
     }
 
     @PutMapping("/{id}")
-    public Lesson updateLesson(@PathVariable Long id, @RequestBody Lesson lesson) {
-        return lessonService.updateLesson(id, lesson);
+    public ResponseEntity<LessonDTO> updateLesson(@PathVariable Long id, @RequestBody LessonDTO lessonDTO) {
+        LessonDTO updatedLesson = lessonService.updateLesson(id, lessonDTO);
+        return ResponseEntity.ok(updatedLesson);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteLesson(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLesson(@PathVariable Long id) {
         lessonService.deleteLesson(id);
+        return ResponseEntity.noContent().build();
     }
 }
