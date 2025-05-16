@@ -1,0 +1,7 @@
+package com.prismaback.prismaback.exception;
+
+public class LessonNotFoundException extends RuntimeException {
+    public LessonNotFoundException(Long id) {
+        super("No s'ha trobat cap lliçó amb l'ID: " + id);
+    }
+}
