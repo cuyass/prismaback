@@ -1,7 +1,6 @@
 package com.prismaback.prismaback.controller;
 
 import com.prismaback.prismaback.DTO.LessonDTO;
-import com.prismaback.prismaback.model.Lesson;
 import com.prismaback.prismaback.service.LessonService;
 import lombok.RequiredArgsConstructor;
 
