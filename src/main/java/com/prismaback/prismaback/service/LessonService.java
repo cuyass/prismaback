@@ -3,6 +3,7 @@ package com.prismaback.prismaback.service;
 import com.prismaback.prismaback.DTO.LessonDTO;
 import com.prismaback.prismaback.model.Lesson;
 import com.prismaback.prismaback.repository.LessonRepository;
+import com.prismaback.prismaback.exception.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class LessonService {
     public LessonDTO getLessonById(Long id) {
         return lessonRepository.findById(id)
                 .map(this::toDTO)
-                .orElse(null); 
+                .orElseThrow(() -> new LessonNotFoundException(id)); 
     }
 
     public LessonDTO createLesson(LessonDTO dto) {
