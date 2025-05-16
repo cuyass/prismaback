@@ -46,31 +46,33 @@ public class LessonService {
         return toDTO(lessonRepository.save(lesson));
     }
 
-    public Lesson updateLesson(Long id, Lesson updatedLesson) {
+    public Lesson updateLesson(Long id, LessonDTO dto) {
         Lesson existing = lessonRepository.findById(id)
         .orElseThrow(() -> new LessonNotFoundException(id));
 
-        if (updatedLesson.getTitle() == null || updatedLesson.getTitle().isBlank()) {
-            throw new LessonValidationException("El títol no pot estar buit.");
-        }
+        validateLessonDTO(dto);
 
-        if (lessonRepository.existsByTitle(updatedLesson.getTitle()) &&
-            !existing.getTitle().equals(updatedLesson.getTitle())) {
-            throw new LessonAlreadyExistsException(updatedLesson.getTitle());
+        if (lessonRepository.existsByTitle(dto.getTitle()) &&
+            !existing.getTitle().equals(dto.getTitle())) {
+            throw new LessonAlreadyExistsException(dto.getTitle());
         }
 
         try {
-        existing.setTitle(updatedLesson.getTitle());
-        existing.setMarkdownContent(updatedLesson.getMarkdownContent());
-        return lessonRepository.save(existing);
+            existing.setTitle(dto.getTitle());
+            existing.setMarkdownContent(dto.getMarkdownContent());
+            Lesson updated = lessonRepository.save(existing);
+            return toDTO(updated);
         } catch (Exception e) {
             throw new LessonUpdateException(id);
         }
     }
 
     public void deleteLesson(Long id) {
+        if (!lessonRepository.existsById(id)) {
+            throw new LessonNotFoundException(id);
+        }
 
-        try{
+        try {
             lessonRepository.deleteById(id);
         } catch (Exception e) {
             throw new LessonDeleteException(id);
@@ -83,5 +85,11 @@ public class LessonService {
                 .title(lesson.getTitle())
                 .markdownContent(lesson.getMarkdownContent())
                 .build();
+    }
+
+    private void validateLessonDTO(LessonDTO dto) {
+        if (dto.getTitle() == null || dto.getTitle().isBlank()) {
+            throw new LessonValidationException("El títol no pot estar buit.");
+        }
     }
 }
