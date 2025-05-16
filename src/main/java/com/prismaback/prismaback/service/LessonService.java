@@ -47,10 +47,25 @@ public class LessonService {
     }
 
     public Lesson updateLesson(Long id, Lesson updatedLesson) {
-        Lesson existing = lessonRepository.findById(id).orElseThrow();
+        Lesson existing = lessonRepository.findById(id)
+        .orElseThrow(() -> new LessonNotFoundException(id));
+
+        if (updatedLesson.getTitle() == null || updatedLesson.getTitle().isBlank()) {
+            throw new LessonValidationException("El títol no pot estar buit.");
+        }
+
+        if (lessonRepository.existsByTitle(updatedLesson.getTitle()) &&
+            !existing.getTitle().equals(updatedLesson.getTitle())) {
+            throw new LessonAlreadyExistsException(updatedLesson.getTitle());
+        }
+
+        try {
         existing.setTitle(updatedLesson.getTitle());
         existing.setMarkdownContent(updatedLesson.getMarkdownContent());
         return lessonRepository.save(existing);
+        } catch (Exception e) {
+            throw new LessonUpdateException(id);
+        }
     }
 
     public void deleteLesson(Long id) {
