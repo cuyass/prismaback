@@ -61,6 +61,19 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(LessonUpdateException.class)
+    public ResponseEntity<?> handleLessonUpdateException(LessonUpdateException ex) {
+        return new ResponseEntity<>(
+            Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "error", "Error d'actualització",
+                "message", ex.getMessage()
+            ),
+            HttpStatus.INTERNAL_SERVER_ERROR
+        );
+    }
+
     @ExceptionHandler(LessonDeleteException.class)
     public ResponseEntity<?> handleLessonDeleteException(LessonDeleteException ex) {
         return new ResponseEntity<>(
@@ -73,5 +86,4 @@ public class GlobalExceptionHandler {
             HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
-    
 }
