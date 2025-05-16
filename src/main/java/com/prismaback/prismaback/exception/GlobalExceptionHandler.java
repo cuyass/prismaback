@@ -60,4 +60,18 @@ public class GlobalExceptionHandler {
             HttpStatus.BAD_REQUEST
         );
     }
+
+    @ExceptionHandler(LessonDeleteException.class)
+    public ResponseEntity<?> handleLessonDeleteException(LessonDeleteException ex) {
+        return new ResponseEntity<>(
+            Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "error", "Error d'eliminació",
+                "message", ex.getMessage()
+            ),
+            HttpStatus.INTERNAL_SERVER_ERROR
+        );
+    }
+    
 }
