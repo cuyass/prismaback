@@ -31,9 +31,16 @@ public class LessonService {
     public LessonDTO createLesson(LessonDTO dto) {
         Lesson lesson = Lesson.builder()
                 .title(dto.getTitle())
-                .content(dto.getContent())
+                .markdownContent(dto.getMarkdownContent())
                 .build();
         return toDTO(lessonRepository.save(lesson));
+    }
+
+    public Lesson updateLesson(Long id, Lesson updatedLesson) {
+        Lesson existing = lessonRepository.findById(id).orElseThrow();
+        existing.setTitle(updatedLesson.getTitle());
+        existing.setMarkdownContent(updatedLesson.getMarkdownContent());
+        return lessonRepository.save(existing);
     }
 
     public void deleteLesson(Long id) {
@@ -44,7 +51,7 @@ public class LessonService {
         return LessonDTO.builder()
                 .id(lesson.getId())
                 .title(lesson.getTitle())
-                .content(lesson.getContent())
+                .markdownContent(lesson.getMarkdownContent())
                 .build();
     }
 }
