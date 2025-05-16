@@ -34,4 +34,17 @@ public class GlobalExceptionHandler {
             HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
+
+    @ExceptionHandler(LessonAlreadyExistsException.class)
+    public ResponseEntity<?> handleLessonAlreadyExistsException(LessonAlreadyExistsException ex) {
+        return new ResponseEntity<>(
+            Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.CONFLICT.value(),
+                "error", "Lliçó duplicada",
+                "message", ex.getMessage()
+            ),
+            HttpStatus.CONFLICT
+        );
+    }
 }
