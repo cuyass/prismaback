@@ -69,7 +69,12 @@ public class LessonService {
     }
 
     public void deleteLesson(Long id) {
-        lessonRepository.deleteById(id);
+
+        try{
+            lessonRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new LessonDeleteException(id)
+        }
     }
 
     private LessonDTO toDTO(Lesson lesson) {
