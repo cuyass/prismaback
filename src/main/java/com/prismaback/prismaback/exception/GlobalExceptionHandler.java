@@ -47,4 +47,17 @@ public class GlobalExceptionHandler {
             HttpStatus.CONFLICT
         );
     }
+
+    @ExceptionHandler(LessonValidationException.class)
+    public ResponseEntity<?> handleLessonValidationException(LessonValidationException ex) {
+        return new ResponseEntity<>(
+            Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.BAD_REQUEST.value(),
+                "error", "Error de validació",
+                "message", ex.getMessage()
+            ),
+            HttpStatus.BAD_REQUEST
+        );
+    }
 }
