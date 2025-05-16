@@ -30,10 +30,19 @@ public class LessonService {
     }
 
     public LessonDTO createLesson(LessonDTO dto) {
+
+        if (dto.getTitle() == null || dto.getTitle().isBlank()) {
+            throw new LessonValidationException("El títol no pot estar buit.");
+        }
+        if (lessonRepository.existsByTitle(dto.getTitle())) {
+            throw new LessonAlreadyExistsException(dto.getTitle());
+        }
+    
         Lesson lesson = Lesson.builder()
                 .title(dto.getTitle())
                 .markdownContent(dto.getMarkdownContent())
                 .build();
+    
         return toDTO(lessonRepository.save(lesson));
     }
 
