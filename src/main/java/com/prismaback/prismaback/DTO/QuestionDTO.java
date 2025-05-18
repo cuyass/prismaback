@@ -1,5 +1,7 @@
 package com.prismaback.prismaback.DTO;
 
+import java.util.List;
+
 import lombok.*;
 
 @Getter
@@ -10,9 +12,6 @@ import lombok.*;
 public class QuestionDTO {
     private Long id;
     private String text;
-    private String optionA;
-    private String optionB;
-    private String optionC;
-    private String optionD;
-    private String correctOption;
+    private List<String> options;
+    private Integer correctOptionIndex;
 }
