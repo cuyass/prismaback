@@ -6,8 +6,6 @@ import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
 
-import com.prismaback.prismaback.model.Question;
-
 @Entity
 @Table(name = "quizzes")
 @Getter
@@ -25,5 +23,6 @@ public class Quiz {
     private Lesson lesson;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Question> questions = new ArrayList<>();
 }

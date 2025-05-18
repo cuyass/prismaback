@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
+import com.prismaback.prismaback.model.Question;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

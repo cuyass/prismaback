@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.prismaback.prismaback.model.Lesson;
+import com.prismaback.prismaback.model.Question;
 import com.prismaback.prismaback.model.Quiz;
 import com.prismaback.prismaback.repository.LessonRepository;
 import com.prismaback.prismaback.repository.QuizRepository;
