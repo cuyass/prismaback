@@ -34,4 +34,7 @@ public class Lesson {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    @OneToOne(mappedBy = "lesson", cascade = CascadeType.ALL)
+    private Quiz quiz;
 }
