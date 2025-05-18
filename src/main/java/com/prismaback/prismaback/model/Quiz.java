@@ -3,10 +3,10 @@ package com.prismaback.prismaback.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
-
 import jakarta.persistence.*;
 import lombok.*;
+
+import com.prismaback.prismaback.model.Question;
 
 @Entity
 @Table(name = "quizzes")
