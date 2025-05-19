@@ -38,6 +38,6 @@ public class Lesson {
     private LocalDateTime updatedAt;
 
     @Builder.Default
-    @OneToOne(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
 }
