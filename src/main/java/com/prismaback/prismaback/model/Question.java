@@ -18,17 +18,13 @@ public class Question {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = false)
-    private Quiz quiz;
+    @JoinColumn(name = "lesson_id", nullable = false)
+    private Lesson lesson;
 
     @Column(nullable = false)
     private String text;
 
-    @ElementCollection
-    @CollectionTable(name = "question_options", joinColumns = @JoinColumn(name = "question_id"))
-    @Column(name = "option_text")
-    private List<String> options;
-
-    @Column(nullable = false)
-    private Integer correctOptionIndex;
+   @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Answer> answers = new ArrayList<>();
 }
+
