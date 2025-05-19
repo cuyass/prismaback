@@ -49,6 +49,28 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
+    public QuestionDTO updateQuestion(Long id, QuestionDTO dto) {
+        Question existingQuestion = questionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pregunta no trobada"));
+    
+        existingQuestion.setText(dto.getText());
+    
+        existingQuestion.getAnswers().clear();
+    
+        List<Answer> updatedAnswers = dto.getAnswers().stream()
+                .map(answerDTO -> Answer.builder()
+                        .text(answerDTO.getText())
+                        .correct(answerDTO.isCorrect())
+                        .question(existingQuestion)
+                        .build())
+                .collect(Collectors.toList());
+    
+        existingQuestion.getAnswers().addAll(updatedAnswers);
+    
+        return toDTO(questionRepository.save(existingQuestion));
+    }
+    
+
     public void deleteQuestion(Long questionId) {
         if (!questionRepository.existsById(questionId)) {
             throw new RuntimeException("Pregunta no trobada");
