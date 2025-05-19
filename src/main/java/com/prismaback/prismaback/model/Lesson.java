@@ -37,6 +37,7 @@ public class Lesson {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @Builder.Default
     @OneToOne(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
 }

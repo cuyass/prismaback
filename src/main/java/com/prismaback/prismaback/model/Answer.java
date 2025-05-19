@@ -23,5 +23,5 @@ public class Answer {
     private String text;
 
     @Column(nullable = false)
-    private boolean isCorrect;
+    private boolean correct;
 }

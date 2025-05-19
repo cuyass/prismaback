@@ -1,6 +1,7 @@
 package com.prismaback.prismaback.model;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,7 +25,7 @@ public class Question {
     @Column(nullable = false)
     private String text;
 
-   @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers = new ArrayList<>();
 }
-

@@ -10,5 +10,5 @@ import lombok.*;
 public class AnswerDTO {
     private Long id;
     private String text;
-    private boolean isCorrect;
+    private boolean correct;
 }

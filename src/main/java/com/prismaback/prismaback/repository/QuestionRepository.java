@@ -9,6 +9,6 @@ import com.prismaback.prismaback.model.Question;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    List<Question> findByQuizId(Long quizId);
+    List<Question> findByLessonId(Long lessonId);
 }
 
