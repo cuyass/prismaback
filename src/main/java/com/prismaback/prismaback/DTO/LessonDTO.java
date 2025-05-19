@@ -16,4 +16,5 @@ public class LessonDTO {
     private String markdownContent;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private List<QuestionDTO> questions;
 }
