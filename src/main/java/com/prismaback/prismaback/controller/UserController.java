@@ -1,6 +1,7 @@
 package com.prismaback.prismaback.controller;
 
 import com.prismaback.prismaback.DTO.UserDTO;
+import com.prismaback.prismaback.exception.UserAlreadyExistsException;
 import com.prismaback.prismaback.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            return ResponseEntity.badRequest().build();
+            throw new UserAlreadyExistsException("Email ja registrat");
         }
         User user = UserService.toEntity(userDto);
         User newUser = userRepository.save(user);
