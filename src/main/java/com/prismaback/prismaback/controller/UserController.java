@@ -4,6 +4,7 @@ import com.prismaback.prismaback.DTO.UserDTO;
 import com.prismaback.prismaback.exception.user.UserAlreadyExistsException;
 import com.prismaback.prismaback.service.UserService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import com.prismaback.prismaback.model.User;
@@ -22,7 +23,7 @@ public class UserController {
     private final UserRepository userRepository;
 
     @PostMapping
-    public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDto) {
+    public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDto) {
         if (userDto.getEmail() == null || userDto.getEmail().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
