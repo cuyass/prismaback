@@ -1,11 +1,9 @@
 package com.prismaback.prismaback.controller;
 
 import com.prismaback.prismaback.DTO.UserDTO;
-import com.prismaback.prismaback.exception.user.UserAlreadyExistsException;
 import com.prismaback.prismaback.service.UserService;
 import com.prismaback.prismaback.response.ApiResponse;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import com.prismaback.prismaback.model.User;
