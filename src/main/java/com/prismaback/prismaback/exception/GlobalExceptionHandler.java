@@ -85,4 +85,40 @@ public class GlobalExceptionHandler {
                         "message", ex.getMessage()),
                 HttpStatus.CONFLICT);
     }
+    @ExceptionHandler(QuestionValidationException.class)
+public ResponseEntity<?> handleQuestionValidationException(QuestionValidationException ex) {
+    return new ResponseEntity<>(
+        Map.of(
+            "timestamp", LocalDateTime.now(),
+            "status", HttpStatus.BAD_REQUEST.value(),
+            "error", "Error de validació de pregunta",
+            "message", ex.getMessage()
+        ),
+        HttpStatus.BAD_REQUEST
+    );
+}
+@ExceptionHandler(QuestionAlreadyExistsException.class)
+public ResponseEntity<?> handleQuestionAlreadyExistsException(QuestionAlreadyExistsException ex) {
+    return new ResponseEntity<>(
+        Map.of(
+            "timestamp", LocalDateTime.now(),
+            "status", HttpStatus.CONFLICT.value(),
+            "error", "Pregunta duplicada",
+            "message", ex.getMessage()
+        ),
+        HttpStatus.CONFLICT
+    );
+}
+@ExceptionHandler(QuestionNotFoundException.class)
+public ResponseEntity<?> handleQuestionNotFoundException(QuestionNotFoundException ex) {
+    return new ResponseEntity<>(
+        Map.of(
+            "timestamp", LocalDateTime.now(),
+            "status", HttpStatus.NOT_FOUND.value(),
+            "error", "Pregunta no trobada",
+            "message", ex.getMessage()
+        ),
+        HttpStatus.NOT_FOUND
+    );
+}
 }
