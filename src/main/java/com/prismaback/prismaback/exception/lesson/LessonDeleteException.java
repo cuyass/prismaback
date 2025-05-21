@@ -1,4 +1,4 @@
-package com.prismaback.prismaback.exception;
+package com.prismaback.prismaback.exception.lesson;
 
 public class LessonDeleteException extends RuntimeException {
     public LessonDeleteException(Long id) {

@@ -4,6 +4,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.prismaback.prismaback.exception.lesson.LessonAlreadyExistsException;
+import com.prismaback.prismaback.exception.lesson.LessonDeleteException;
+import com.prismaback.prismaback.exception.lesson.LessonNotFoundException;
+import com.prismaback.prismaback.exception.lesson.LessonUpdateException;
+import com.prismaback.prismaback.exception.lesson.LessonValidationException;
+import com.prismaback.prismaback.exception.question.QuestionAlreadyExistsException;
+import com.prismaback.prismaback.exception.question.QuestionNotFoundException;
+import com.prismaback.prismaback.exception.question.QuestionValidationException;
+import com.prismaback.prismaback.exception.answer.AnswerAlreadyExistsException;
+import com.prismaback.prismaback.exception.answer.AnswerNotFoundException;
+import com.prismaback.prismaback.exception.answer.AnswerValidationException;
+import com.prismaback.prismaback.exception.user.UserAlreadyExistsException;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 

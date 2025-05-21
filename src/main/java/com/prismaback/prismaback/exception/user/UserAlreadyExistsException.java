@@ -1,4 +1,4 @@
-package com.prismaback.prismaback.exception;
+package com.prismaback.prismaback.exception.user;
 
 public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException(String message) {

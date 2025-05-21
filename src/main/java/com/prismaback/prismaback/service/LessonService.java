@@ -3,7 +3,12 @@ package com.prismaback.prismaback.service;
 import com.prismaback.prismaback.DTO.LessonDTO;
 import com.prismaback.prismaback.model.Lesson;
 import com.prismaback.prismaback.repository.LessonRepository;
-import com.prismaback.prismaback.exception.*;
+import com.prismaback.prismaback.exception.lesson.LessonAlreadyExistsException;
+import com.prismaback.prismaback.exception.lesson.LessonDeleteException;
+import com.prismaback.prismaback.exception.lesson.LessonNotFoundException;
+import com.prismaback.prismaback.exception.lesson.LessonUpdateException;
+import com.prismaback.prismaback.exception.lesson.LessonValidationException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

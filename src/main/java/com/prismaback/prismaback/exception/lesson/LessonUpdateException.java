@@ -1,4 +1,4 @@
-package com.prismaback.prismaback.exception;
+package com.prismaback.prismaback.exception.lesson;
 
 public class LessonUpdateException extends RuntimeException {
     public LessonUpdateException(Long id) {

@@ -1,4 +1,4 @@
-package com.prismaback.prismaback.exception;
+package com.prismaback.prismaback.exception.lesson;
 
 public class LessonNotFoundException extends RuntimeException {
     public LessonNotFoundException(Long id) {
