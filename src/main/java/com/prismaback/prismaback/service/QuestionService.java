@@ -61,9 +61,9 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
-    public QuestionDTO updateQuestion(Long id, QuestionDTO dto) {
-        Question existingQuestion = questionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pregunta no trobada"));
+    public QuestionDTO updateQuestion(Long questionId, QuestionDTO dto) {
+        Question existingQuestion = questionRepository.findById(questionId)
+                .orElseThrow(() -> new QuestionNotFoundException(questionId));
     
         existingQuestion.setText(dto.getText());
     
@@ -85,7 +85,7 @@ public class QuestionService {
 @Transactional
     public void deleteQuestion(Long questionId) {
         if (!questionRepository.existsById(questionId)) {
-            throw new QuestionNotFoundException("Pregunta no trobada");
+            throw new QuestionNotFoundException(questionId);
         }
         questionRepository.deleteById(questionId);
     }
