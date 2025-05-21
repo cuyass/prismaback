@@ -3,6 +3,7 @@ package com.prismaback.prismaback.controller;
 import com.prismaback.prismaback.DTO.UserDTO;
 import com.prismaback.prismaback.exception.user.UserAlreadyExistsException;
 import com.prismaback.prismaback.service.UserService;
+import com.prismaback.prismaback.response.ApiResponse;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,16 +24,25 @@ public class UserController {
     private final UserRepository userRepository;
 
     @PostMapping
-    public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDto) {
+    public ResponseEntity<ApiResponse<UserDTO>> registerUser(@RequestBody UserDTO userDto) {
         if (userDto.getEmail() == null || userDto.getEmail().isEmpty()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(ApiResponse.<UserDTO>builder()
+                .message("Email obligatori.")
+                .data(null)
+                .build());
         }
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            throw new UserAlreadyExistsException("Email ja registrat");
+            return ResponseEntity.badRequest().body(ApiResponse.<UserDTO>builder()
+                .message("Email ja registrat.")
+                .data(null)
+                .build());
         }
         User user = UserService.toEntity(userDto);
         User newUser = userRepository.save(user);
         UserDTO created = UserService.toDto(newUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.<UserDTO>builder()
+            .message("Usuari registrat correctament.")
+            .data(created)
+            .build());
     }
 }
