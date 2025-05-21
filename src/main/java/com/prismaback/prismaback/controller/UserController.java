@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 
 import com.prismaback.prismaback.model.User;
 import com.prismaback.prismaback.repository.UserRepository;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,7 @@ public class UserController {
         }
         User user = UserService.toEntity(userDto);
         User newUser = userRepository.save(user);
-        return ResponseEntity.ok(UserService.toDto(newUser));
+        UserDTO created = UserService.toDto(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 }
