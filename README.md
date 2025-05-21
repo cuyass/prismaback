@@ -19,7 +19,7 @@
 ---
 
 ## 📦 Estructura del projecte
-
+```
 src/
 ├── main/
 │ ├── java/com/prismaback/prismaback/
@@ -33,7 +33,7 @@ src/
 │ └── resources/
 │ └── application.properties
 └── test/
-
+```
 ---
 
 ## ⚙️ Configuració i execució
