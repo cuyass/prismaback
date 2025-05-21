@@ -2,6 +2,9 @@ package com.prismaback.prismaback.service;
 
 import com.prismaback.prismaback.DTO.AnswerDTO;
 import com.prismaback.prismaback.DTO.QuestionDTO;
+import com.prismaback.prismaback.exception.lesson.LessonNotFoundException;
+import com.prismaback.prismaback.exception.question.QuestionNotFoundException;
+import com.prismaback.prismaback.exception.question.QuestionValidationException;
 import com.prismaback.prismaback.model.Answer;
 import com.prismaback.prismaback.model.Lesson;
 import com.prismaback.prismaback.model.Question;
@@ -10,6 +13,7 @@ import com.prismaback.prismaback.repository.QuestionRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,9 +25,17 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
     private final LessonRepository lessonRepository;
 
+    @Transactional
     public QuestionDTO createQuestion(Long lessonId, QuestionDTO dto) {
+        if (dto.getText() == null || dto.getText().isBlank()) {
+            throw new QuestionValidationException("El text de la pregunta és obligatori");
+        }
+        if (dto.getAnswers() == null || dto.getAnswers().isEmpty()) {
+            throw new QuestionValidationException("Cal afegir almenys una resposta");
+        }
+
         Lesson lesson = lessonRepository.findById(lessonId)
-                .orElseThrow(() -> new RuntimeException("Lliçó no trobada"));
+                .orElseThrow(() -> new LessonNotFoundException(lessonId));
 
         Question question = new Question();
         question.setText(dto.getText());
@@ -70,10 +82,10 @@ public class QuestionService {
         return toDTO(questionRepository.save(existingQuestion));
     }
     
-
+@Transactional
     public void deleteQuestion(Long questionId) {
         if (!questionRepository.existsById(questionId)) {
-            throw new RuntimeException("Pregunta no trobada");
+            throw new QuestionNotFoundException("Pregunta no trobada");
         }
         questionRepository.deleteById(questionId);
     }
