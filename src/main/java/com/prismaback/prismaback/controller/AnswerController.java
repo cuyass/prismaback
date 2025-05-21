@@ -2,6 +2,7 @@ package com.prismaback.prismaback.controller;
 
 import com.prismaback.prismaback.DTO.AnswerDTO;
 import com.prismaback.prismaback.service.AnswerService;
+import com.prismaback.prismaback.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +18,22 @@ public class AnswerController {
     private final AnswerService answerService;
 
     @GetMapping("/question/{questionId}")
-    public ResponseEntity<List<AnswerDTO>> getAnswersByQuestion(@PathVariable Long questionId) {
-        return ResponseEntity.ok(answerService.getAnswersByQuestionId(questionId));
+    public ResponseEntity<ApiResponse<List<AnswerDTO>>> getAnswersByQuestion(@PathVariable Long questionId) {
+        List<AnswerDTO> answers = answerService.getAnswersByQuestionId(questionId);
+        return ResponseEntity.ok(ApiResponse.<List<AnswerDTO>>builder()
+            .message("Respostes carregades correctament.")
+            .data(answers)
+            .build());
     }
 
     @PostMapping("/question/{questionId}")
-    public ResponseEntity<AnswerDTO> createAnswer(
+    public ResponseEntity<ApiResponse<AnswerDTO>> createAnswer(
             @PathVariable Long questionId,
             @RequestBody AnswerDTO dto) {
-        return ResponseEntity.ok(answerService.createAnswer(questionId, dto));
+        AnswerDTO created = answerService.createAnswer(questionId, dto);
+        return ResponseEntity.status(201).body(ApiResponse.<AnswerDTO>builder()
+            .message("Resposta creada correctament.")
+            .data(created)
+            .build());
     }
 }
