@@ -32,8 +32,8 @@ public class QuestionController {
     } */
 
     @PostMapping("/lesson/{lessonId}")
-    public ResponseEntity<QuestionDTO> createQuestion(@RequestParam Long id, @RequestBody QuestionDTO dto) {
-        return ResponseEntity.ok(questionService.createQuestion(id, dto));
+    public ResponseEntity<QuestionDTO> createQuestion(@PathVariable Long lessonId, @RequestBody QuestionDTO dto) {
+        return ResponseEntity.ok(questionService.createQuestion(lessonId, dto));
     }
 
     @PutMapping("/{questionId}")
