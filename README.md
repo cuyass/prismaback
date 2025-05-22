@@ -8,13 +8,13 @@
 
 ## Tecnologies principals
 
-- **Java 21**
-- **Spring Boot**
-- **Spring Data JPA**
-- **Lombok**
-- **PostgreSQL**
-- **CORS** configurat per al frontend a [http://localhost:5173](http://localhost:5173)
-- **Resposta d’API unificada** per a totes les respostes
+- Java v.21
+- Spring Boot v.3.4.5
+- Spring Data JPA v.3.4.5
+- Lombok v.1.18.38
+- PostgreSQL v.42.7.5
+- CORS configurat per al frontend a [http://localhost:5173](http://localhost:5173)
+- Resposta d’API unificada per a totes les respostes
 
 ---
 
@@ -119,7 +119,7 @@ Exemple d’error:
 ## Seguretat
 
 - CORS habilitat només per al frontend en desenvolupament (`http://localhost:5173`).
-- (Opcional) Pots afegir autenticació JWT, rols, etc.
+- A desenvolupar: autenticació JWT, rols, protecció d'arxius.
 
 ---
 
@@ -128,6 +128,7 @@ Exemple d’error:
 - Utilitza **Lombok** per reduir boilerplate.
 - Utilitza **DTOs** per exposar només les dades necessàries.
 - Pots testar amb Postman, Insomnia o des del teu frontend React.
+- A desenvolupar: tests unitaris.
 
 ---
 
