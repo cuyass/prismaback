@@ -36,6 +36,10 @@ src/
 ```
 ---
 
+> [!WARNING]  
+> PRISMA és un projecte que està en la primera fase de desenvolupament i li manca la seguretat bàsica.
+> 22/05/2025 -> no hi ha rols, la ruta /admindashboard està desprotegida, els arxius JSON estan desprotegits, manca de login, el registre de correu no està encriptat, el component Markdown Editor no està sanititzat, el codi no té tests unitaris. Utilitzar amb precaució i sota propi risc!
+
 ## ⚙️ Configuració i execució
 
 ### 1. Clona el repositori
